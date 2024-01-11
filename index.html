@@ -175,7 +175,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/10/Using%20Hexo%20and%20Next%20theme%20to%20build%20a%20blog%20at%20GIthub%20Page/" class="post-title-link" itemprop="url">Using Hexo and Next theme to build a blog at GIthub Page</a>
+          <a href="/2024/01/10/Using%20Hexo%20and%20Next%20theme%20to%20build%20a%20blog%20at%20GIthub%20Page/" class="post-title-link" itemprop="url">Using Hexo and Next theme to build a blog at Github Page</a>
         </h2>
 
         <div class="post-meta-container">
@@ -185,9 +185,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-01-10 02:17:21 / Modified: 02:18:29" itemprop="dateCreated datePublished" datetime="2024-01-10T02:17:21+08:00">2024-01-10</time>
+      <time title="Created: 2024-01-10 02:17:21" itemprop="dateCreated datePublished" datetime="2024-01-10T02:17:21+08:00">2024-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-11 18:35:50" itemprop="dateModified" datetime="2024-01-11T18:35:50+08:00">2024-01-11</time>
     </span>
 
   
@@ -200,7 +206,47 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <p>Posted this to record the issues I have met when using Hexo.</p>
+<p>I’m using </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node: v21.5.0</span><br><span class="line">hexo: 7.0.0</span><br><span class="line">hexo-cli: 4.3.1</span><br><span class="line">npm: 10.2.4</span><br></pre></td></tr></table></figure>
+
+
+<p>The Docs given by Hexo is partially wrong. Here are some solution.</p>
+<h1 id="Wrong-URL-in-config-yml"><a href="#Wrong-URL-in-config-yml" class="headerlink" title="Wrong URL in _config.yml"></a>Wrong URL in _config.yml</h1><p>So After I installed hexo and created a username.github.io repository in Github.<br>I found the <a target="_blank" rel="noopener" href="https://username.github.io/">https://username.github.io/</a> is not generated as in local( local build just using <code> hexo server</code> )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://username.github.io/project</span><br></pre></td></tr></table></figure>
+
+<h2 id="The-url-should-not-be-the-repo-url-but-the-github-page-url-like-this"><a href="#The-url-should-not-be-the-repo-url-but-the-github-page-url-like-this" class="headerlink" title="The url should not be the repo url, but the github page url like this:"></a>The url should not be the repo url, but the github page url like this:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url: https://username.github.io/  </span><br></pre></td></tr></table></figure></h2><h1 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h1><p><em>Based on the README,</em> <em>I’m using followed commands to generate and deploy;</em></p>
+<p><strong>ISSUE 1</strong> :  When comes to the <strong>hexo deploy</strong> step, put the username and password of Github account, and failed authentication, cuz github has not support this auth since 2021  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy  </span><br></pre></td></tr></table></figure>
+<h2 id="I-included-this-block-in-my-config-yaml-file"><a href="#I-included-this-block-in-my-config-yaml-file" class="headerlink" title="I included this block in my _config.yaml file:"></a>I included this block in my <code>_config.yaml</code> file:<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;git repo ssh&gt;</span><br><span class="line">  branch: main</span><br><span class="line">  token: &lt;generate a classic token in github&gt;  </span><br></pre></td></tr></table></figure></h2><p><strong>ISSUE 2</strong> : Submodule  </p>
+<p>Actually this one is kind tricky, after I have solved the problem of wrong url, I found the Github page is still not generated.  </p>
+<p>Then I checked the Github action, saw the pipeline is failed for: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No url found for submodule path &#x27;themes/next&#x27; in .gitmodules</span><br></pre></td></tr></table></figure>
+<p>To solve this issue, here is solution:</p>
+<ul>
+<li><code>touch file .gitmodules</code></li>
+<li><code>cd themes/next</code></li>
+<li><code>git remote -v</code>, check the remote origin</li>
+<li>in the .gitmodules files, add this block<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[submodule &quot;themes/next&quot;]</span><br><span class="line"> path = themes/next</span><br><span class="line"> url = &lt;forked from next-theme, put ssh or HTTP url here&gt;</span><br></pre></td></tr></table></figure></li>
+<li><code>git submodule update --init --recursive</code></li>
+<li>check <code>config</code>file in <code>.git</code> folder</li>
+<li>the submodule block should exists</li>
+</ul>
+<hr>
+<p><strong>ISSUE 3</strong> : remote themes&#x2F;next folder is empty</p>
+<p>themes&#x2F;next remote origin is forked from <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#46;&#x63;&#x6f;&#109;">&#103;&#x69;&#x74;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#46;&#x63;&#x6f;&#109;</a>:next-theme&#x2F;hexo-theme-next.git</p>
+<p>The themes&#x2F;next folder in local is updated with remote origin.  </p>
+<p>I’ve edited <code>themes/next/_config.yml</code> in local, then in terminal</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p>found nothing changed, the <code>themes/next</code> folder is not tracked by git.</p>
+<p>So I assume that’s because <code>themes/next</code> remote origin is <code>git@github.com:next-theme/hexo-theme-next.git</code>, apparently I don’t have access to <code>git push</code> </p>
+<p>Change the remote origin to github page repo.  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote remove origin</span><br><span class="line">git remote add origin git@github.com:yimai-yan/yimai-yan.github.io.git</span><br><span class="line">git status</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>had been tracked by main repo.</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ISSUE 4: Github action is failed</span><br><span class="line"></span><br><span class="line">Github page is still broken, checked remote ```themes/next``` dir is updated to local, and ```hexo deploy``` in local, website seems fine.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![action failed.png](assets/action failed.png)</span><br><span class="line"></span><br><span class="line">Then I get the commit id from log, it&#x27;s located in main repo; while the ```themes/next``` repo latest commit id is not coherent.  </span><br><span class="line"></span><br><span class="line">```themes/next``` repo has changed origin in previous steps, and the commit id is different.</span><br><span class="line"></span><br><span class="line">Then I tried followed commands to use both hexo command and github action to deploy;</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy </span><br></pre></td></tr></table></figure>
+<p>The workflow in github is build success, finally it works.</p>
+<hr>
+
       
     </div>
 
