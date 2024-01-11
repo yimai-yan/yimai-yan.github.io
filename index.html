@@ -193,7 +193,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 18:35:50" itemprop="dateModified" datetime="2024-01-11T18:35:50+08:00">2024-01-11</time>
+      <time title="Modified: 2024-01-12 01:27:42" itemprop="dateModified" datetime="2024-01-12T01:27:42+08:00">2024-01-12</time>
     </span>
 
   
@@ -212,12 +212,13 @@
 
 
 <p>The Docs given by Hexo is partially wrong. Here are some solution.</p>
-<h1 id="Wrong-URL-in-config-yml"><a href="#Wrong-URL-in-config-yml" class="headerlink" title="Wrong URL in _config.yml"></a>Wrong URL in _config.yml</h1><p>So After I installed hexo and created a username.github.io repository in Github.<br>I found the <a target="_blank" rel="noopener" href="https://username.github.io/">https://username.github.io/</a> is not generated as in local( local build just using <code> hexo server</code> )</p>
+<h1 id="Wrong-URL-in-config-yml"><a href="#Wrong-URL-in-config-yml" class="headerlink" title="Wrong URL in _config.yml"></a>Wrong URL in _config.yml</h1><p>So After I installed hexo and created a username.github.io repository in Github.<br>I found the <a target="_blank" rel="noopener" href="https://username.github.io/">https://username.github.io/</a> is not generated as in local (local build just using <code> hexo server</code> )</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://username.github.io/project</span><br></pre></td></tr></table></figure>
 
 <h2 id="The-url-should-not-be-the-repo-url-but-the-github-page-url-like-this"><a href="#The-url-should-not-be-the-repo-url-but-the-github-page-url-like-this" class="headerlink" title="The url should not be the repo url, but the github page url like this:"></a>The url should not be the repo url, but the github page url like this:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url: https://username.github.io/  </span><br></pre></td></tr></table></figure></h2><h1 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h1><p><em>Based on the README,</em> <em>I’m using followed commands to generate and deploy;</em></p>
 <p><strong>ISSUE 1</strong> :  When comes to the <strong>hexo deploy</strong> step, put the username and password of Github account, and failed authentication, cuz github has not support this auth since 2021  </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy  </span><br></pre></td></tr></table></figure>
+
 <h2 id="I-included-this-block-in-my-config-yaml-file"><a href="#I-included-this-block-in-my-config-yaml-file" class="headerlink" title="I included this block in my _config.yaml file:"></a>I included this block in my <code>_config.yaml</code> file:<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;git repo ssh&gt;</span><br><span class="line">  branch: main</span><br><span class="line">  token: &lt;generate a classic token in github&gt;  </span><br></pre></td></tr></table></figure></h2><p><strong>ISSUE 2</strong> : Submodule  </p>
 <p>Actually this one is kind tricky, after I have solved the problem of wrong url, I found the Github page is still not generated.  </p>
 <p>Then I checked the Github action, saw the pipeline is failed for: </p>
@@ -234,7 +235,7 @@
 </ul>
 <hr>
 <p><strong>ISSUE 3</strong> : remote themes&#x2F;next folder is empty</p>
-<p>themes&#x2F;next remote origin is forked from <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#x6d;">&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#x6d;</a>:next-theme&#x2F;hexo-theme-next.git</p>
+<p>themes&#x2F;next remote origin is forked from <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#x6d;</a>:next-theme&#x2F;hexo-theme-next.git</p>
 <p>The themes&#x2F;next folder in local is updated with remote origin.  </p>
 <p>I’ve edited <code>themes/next/_config.yml</code> in local, then in terminal</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
