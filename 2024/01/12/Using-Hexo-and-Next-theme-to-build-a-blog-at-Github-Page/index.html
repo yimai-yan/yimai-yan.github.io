@@ -28,7 +28,7 @@
 <meta property="og:description" content="Posted this to record the issues I have met when using Hexo. I’m using 1234node: v21.5.0hexo: 7.0.0hexo-cli: 4.3.1npm: 10.2.4   The Docs given by Hexo is partially wrong. Here are some solution. Wrong">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-01-11T17:43:23.000Z">
-<meta property="article:modified_time" content="2024-01-11T18:23:38.707Z">
+<meta property="article:modified_time" content="2024-01-12T02:59:01.195Z">
 <meta property="article:author" content="YAN, YIMAI">
 <meta name="twitter:card" content="summary">
 
@@ -191,7 +191,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-01-12 01:43:23 / Modified: 02:23:38" itemprop="dateCreated datePublished" datetime="2024-01-12T01:43:23+08:00">2024-01-12</time>
+      <time title="Created: 2024-01-12 01:43:23 / Modified: 10:59:01" itemprop="dateCreated datePublished" datetime="2024-01-12T01:43:23+08:00">2024-01-12</time>
     </span>
 
   
@@ -232,7 +232,7 @@
 </ul>
 <hr>
 <p><strong>ISSUE 3</strong> : remote themes&#x2F;next folder is empty</p>
-<p>themes&#x2F;next remote origin is forked from <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#x6f;&#109;">&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#x6f;&#109;</a>:next-theme&#x2F;hexo-theme-next.git</p>
+<p>themes&#x2F;next remote origin is forked from <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#109;</a>:next-theme&#x2F;hexo-theme-next.git</p>
 <p>The themes&#x2F;next folder in local is updated with remote origin.</p>
 <p>I’ve edited <code>themes/next/_config.yml</code> in local, then in terminal</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
@@ -241,7 +241,7 @@
 <p>So I assume that’s because <code>themes/next</code> remote origin is <code>git@github.com:next-theme/hexo-theme-next.git</code>, apparently I don’t have access to <code>git push</code></p>
 <p>Change the remote origin to github page repo.</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote remove origin</span><br><span class="line">git remote add origin git@github.com:yimai-yan/yimai-yan.github.io.git</span><br><span class="line">git status</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><figcaption><span>had been tracked by main repo.</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ISSUE 4: Github action is failed</span><br><span class="line"></span><br><span class="line">Github page is still broken, checked remote ```themes/next``` dir is updated to local, and ```hexo deploy``` in local, website seems fine.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;% asset_img actionfailed.png %&#125;  </span><br><span class="line"></span><br><span class="line">{% asset_img "actionfailed.png" "actionfailed.png" %}  </span><br><span class="line"></span><br><span class="line">Then I get the commit id from log, it&#x27;s located in main repo; while the ```themes/next``` repo latest commit id is not coherent.</span><br><span class="line"></span><br><span class="line">```themes/next``` repo has changed origin in previous steps, and the commit id is different.</span><br><span class="line"></span><br><span class="line">Then I tried followed commands to use both hexo command and github action to deploy;</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>had been tracked by main repo.</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ISSUE 4: Github action is failed  </span><br><span class="line"></span><br><span class="line">Github page is still broken, checked remote ```themes/next``` dir is updated to local, and ```hexo deploy``` in local, website seems fine.    </span><br><span class="line"></span><br><span class="line">{% asset_img "actionfailed.png" "actionfailed.png" %}  </span><br><span class="line"></span><br><span class="line">Then I get the commit id from log, it&#x27;s located in main repo; while the ```themes/next``` repo latest commit id is not coherent.</span><br><span class="line"></span><br><span class="line">```themes/next``` repo has changed origin in previous steps, and the commit id is different.</span><br><span class="line"></span><br><span class="line">Then I tried followed commands to use both hexo command and github action to deploy;</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy   </span><br></pre></td></tr></table></figure>
 <p>The workflow in github is build success, finally it works.</p>
 <hr>
 
